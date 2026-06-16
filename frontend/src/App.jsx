@@ -7,26 +7,29 @@ import Cart from "./pages/Cart.jsx"
 export default function App() {
 
   useEffect(() => {
-    // Task 3.7 — identify the user
-    intempt('identify', {
-      userId: 'onboarding-tester@yourcompany.com',
-      userAttributes: {
-        name: 'Onboarding Tester',
-        plan: 'trial',
-        signupDate: '2026-06-15'
-      }
-    })
+    // wait for SDK to fully load before calling
+    setTimeout(() => {
+      if (typeof window.intempt !== 'function') return
 
-    // Task 3.8 — group the user into an account
-    intempt('group', {
-      accountId: 'onboarding-corp',
-      accountAttributes: {
-        name: 'Onboarding Corp',
-        industry: 'Technology',
-        employeeCount: 50
-      }
-    })
-  }, []) // runs once when app first loads
+      window.intempt('identify', {
+        userId: 'onboarding-tester@yourcompany.com',
+        userAttributes: {
+          name: 'Onboarding Tester',
+          plan: 'trial',
+          signupDate: '2026-06-15'
+        }
+      })
+
+      window.intempt('group', {
+        accountId: 'onboarding-corp',
+        accountAttributes: {
+          name: 'Onboarding Corp',
+          industry: 'Technology',
+          employeeCount: 50
+        }
+      })
+    }, 2000) // give SDK 2 seconds to load
+  }, [])
 
   return (
     <>
