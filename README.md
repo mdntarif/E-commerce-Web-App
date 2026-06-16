@@ -9,19 +9,42 @@ A minimal full-stack e-commerce demo.
 
 ```
 .
-├── backend/          # Express API
-│   ├── server.js     # Routes + in-memory products array
-│   └── package.json
-└── frontend/         # React app (Vite)
-    ├── src/
-    │   ├── components/   # Navbar, ProductCard
-    │   ├── context/      # CartContext (global cart state)
-    │   ├── pages/        # ProductList, Cart
-    │   ├── App.jsx
-    │   ├── main.jsx
-    │   └── index.css
-    ├── index.html
-    └── package.json
+├── README.md
+├── backend
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── server.js
+│   └── vercel.json
+├── frontend
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── src
+│   │   ├── App.jsx
+│   │   ├── components
+│   │   │   ├── Navbar.jsx
+│   │   │   └── ProductCard.jsx
+│   │   ├── context
+│   │   │   └── CartContext.jsx
+│   │   ├── index.css
+│   │   ├── main.jsx
+│   │   └── pages
+│   │       ├── Cart.jsx
+│   │       └── ProductList.jsx
+│   ├── vercel.json
+│   └── vite.config.js
+├── pnpm-lock.yaml
+├── public
+│   ├── apple-icon.png
+│   ├── icon-dark-32x32.png
+│   ├── icon-light-32x32.png
+│   ├── icon.svg
+│   ├── placeholder-logo.png
+│   ├── placeholder-logo.svg
+│   ├── placeholder-user.jpg
+│   ├── placeholder.jpg
+│   └── placeholder.svg
+└── tree.txt
 ```
 
 ## API Endpoints
