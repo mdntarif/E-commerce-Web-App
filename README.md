@@ -94,4 +94,3 @@ Open `http://localhost:3000` in your browser.
 - Increase / decrease quantity in the cart
 - Remove items from the cart
 - See the running total price
-
