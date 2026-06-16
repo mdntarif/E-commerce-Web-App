@@ -5,12 +5,12 @@ export default function ProductCard({ product }) {
 
   const handleAddToCart = () => {
     addToCart(product)
-
-    // Task 3.3 — fire custom event when Add to Cart is clicked
-    intempt('track', {
-      eventTitle: 'button_clicked',
-      data: { buttonName: 'add-to-cart', page: 'homepage', productName: product.name }
-    })
+    if (typeof window.intempt === 'function') {
+      window.intempt('track', {
+        eventTitle: 'button_clicked',
+        data: { buttonName: 'add-to-cart', page: 'homepage', productName: product.name }
+      })
+    }
   }
 
   return (
