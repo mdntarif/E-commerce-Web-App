@@ -7,12 +7,12 @@ import Cart from "./pages/Cart.jsx"
 export default function App() {
 
   useEffect(() => {
-    // wait for SDK to fully load before calling
-    setTimeout(() => {
-      if (typeof window.intempt !== 'function') return
+    if (!window.intemptInstance) return
 
-      window.intempt('identify', {
+    try {
+      window.intemptInstance.identify({
         userId: 'onboarding-tester@yourcompany.com',
+        eventTitle: 'User Identified',
         userAttributes: {
           name: 'Onboarding Tester',
           plan: 'trial',
@@ -20,15 +20,18 @@ export default function App() {
         }
       })
 
-      window.intempt('group', {
+      window.intemptInstance.group({
         accountId: 'onboarding-corp',
+        eventTitle: 'Account Grouped',
         accountAttributes: {
           name: 'Onboarding Corp',
           industry: 'Technology',
           employeeCount: 50
         }
       })
-    }, 2000) // give SDK 2 seconds to load
+    } catch (err) {
+      console.error('Intempt error:', err.message)
+    }
   }, [])
 
   return (

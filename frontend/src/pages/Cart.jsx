@@ -6,15 +6,18 @@ export default function Cart() {
 
   // Task 3.5 — fire a rich event with user info
   const handleDemoRequest = () => {
-    if (typeof window.intempt === 'function') {
-      window.intempt('record', {
+    try {
+      if (!window.intemptInstance) return
+      window.intemptInstance.record({
         eventTitle: 'demo_requested',
         userId: 'onboarding-tester@yourcompany.com',
         userAttributes: { name: 'Onboarding Tester', role: 'New Hire' },
         data: { plan: 'growth', source: 'onboarding-exercise' }
       })
+      alert('Demo requested! Check Intempt dashboard.')
+    } catch (err) {
+      console.error('Intempt error:', err.message)
     }
-    alert('Demo requested! Check Intempt dashboard.')
   }
 
   if (cartItems.length === 0) {
