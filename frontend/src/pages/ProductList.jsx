@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import ProductCard from "../components/ProductCard.jsx"
 
 // Base URL of the Express backend.
-const API_URL = "http://localhost:5000"
+const API_URL = import.meta.env.PROD ? "/_/backend" : "http://localhost:5000"
 
 // Product listing page: fetches products from the backend and shows them in a grid.
 export default function ProductList() {
