@@ -2,7 +2,7 @@
     "rewrites": [
       {
         "source": "/api/:path*",
-        "destination": "https://mini-shop-backend-xyz.vercel.app/api/:path*"
+        "destination": "https://e-commerce-web-app-umbg.vercel.app/api/:path*"
       }
     ]
   }
