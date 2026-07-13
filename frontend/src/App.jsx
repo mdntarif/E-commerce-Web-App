@@ -7,10 +7,10 @@ import Cart from "./pages/Cart.jsx"
 export default function App() {
 
   useEffect(() => {
-    if (!window.intemptInstance) return
+    if (!window.intempt) return
 
     try {
-      window.intemptInstance.identify({
+      window.intempt.identify({
         userId: 'onboarding-tester@yourcompany.com',
         eventTitle: 'User Identified',
         userAttributes: {
@@ -20,7 +20,7 @@ export default function App() {
         }
       })
 
-      window.intemptInstance.group({
+      window.intempt.group({
         accountId: 'onboarding-corp',
         eventTitle: 'Account Grouped',
         accountAttributes: {

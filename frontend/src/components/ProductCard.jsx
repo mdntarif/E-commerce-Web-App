@@ -7,12 +7,12 @@ export default function ProductCard({ product }) {
     addToCart(product)
 
     try {
-      if (!window.intemptInstance) return
-      window.intemptInstance.track({
+      if (!window.intempt) return
+      window.intempt.track({
         eventTitle: 'button_clicked',
         data: { buttonName: 'add-to-cart', productName: product.name, price: product.price }
       })
-      window.intemptInstance.productAdd({
+      window.intempt.productAdd({
         productId: String(product.id),
         quantity: 1
       })
