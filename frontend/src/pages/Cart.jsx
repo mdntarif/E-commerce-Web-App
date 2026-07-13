@@ -7,8 +7,8 @@ export default function Cart() {
   // Task 3.5 — fire a rich event with user info
   const handleDemoRequest = () => {
     try {
-      if (!window.intemptInstance) return
-      window.intemptInstance.record({
+      if (!window.intempt) return
+      window.intempt.record({
         eventTitle: 'demo_requested',
         userId: 'onboarding-tester@yourcompany.com',
         userAttributes: { name: 'Onboarding Tester', role: 'New Hire' },
