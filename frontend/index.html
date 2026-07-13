@@ -6,19 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mini Shop</title>
 
-
-  <script>!function (w) {
-      if (w.intempt && (w.intempt._isReal || w.intempt._isStub)) return; var q = [], p = [], i = 1; function e(m, a) { q.push({ method: m, args: a, timestamp: Date.now() }) } function v(m) { return function () { e(m, [].slice.call(arguments)) } } function r(m, f) {
-        return function () {
-          return
-          e(m, [].slice.call(arguments)), f
-        }
-      } function n() { var a = [].slice.call(arguments), d = i++; e("recommendation", a); var s = { id: d }; return p.push(s), new Promise(function (t, c) { s.resolve = t, s.reject = c }) } w.intempt = { _isStub: !0, _queue: q, _pendingPromises: p, getProfileId: r("getProfileId", void 0), optIn: v("optIn"), optOut: v("optOut"), isUserOptIn: r("isUserOptIn", !0), identify: v("identify"), group: v("group"), track: v("track"), record: v("record"), alias: v("alias"), consent: v("consent"), productAdd: v("productAdd"), productOrdered: v("productOrdered"), productView: v("productView"), logOut: v("logOut"), recommendation: n }
-    }(window);</script>
-  <script async
-    src="https://cdn.intempt.com/v1/intempt.min.js?organization=test_by_tarif&project=test_by_tarif_project&source=1799596713258655744&key=0faSyuxOB1JNlKin.MwCSIF0wQilvLSj5rFJR6A2UyLCcThRn"></script>
-
-
+  <!-- Paste the intempt SDK code snippet here -->
+  <script>
+(function () {
+  if (window.intempt) return;
+  var queue = [], pending = [];
+  var methods = ['identify','group','track','record','alias','consent',
+                 'productAdd','productOrdered','productView','logOut',
+                 'optIn','optOut','isUserOptIn','recommendation'];
+  var stub = { _isStub: true, _queue: queue, _pendingPromises: pending };
+  methods.forEach(function (m) {
+    stub[m] = function () {
+      var args = [].slice.call(arguments);
+      if (m === 'recommendation') {
+        return new Promise(function (resolve, reject) {
+          pending.push({ resolve: resolve, reject: reject });
+          queue.push({ method: m, args: args });
+        });
+      }
+      queue.push({ method: m, args: args });
+    };
+  });
+  window.intempt = stub;
+})();
+</script>
+<script src="https://cdn.intempt.com/intempt.min.js?organization=abc123&project=abc123_project&source=1819775810778001408&key=2fq6Jp82G7dCZdWk.XrR3RbvnlU3RA8LocnINzk2_GPCeFxVF"></script>
 
 </head>
 
