@@ -39,10 +39,12 @@ export default function Navbar() {
   }
 
   // Logout trigger button — fires a logout event, then resets the SDK's identity.
+  // Uses record() instead of track() because track() requires a non-empty `data`
+  // object or the SDK throws (and we have nothing meaningful to attach here).
   const handleLogout = () => {
     try {
       if (!window.intempt) return
-      window.intempt.track({ eventTitle: 'logout' })
+      window.intempt.record({ eventTitle: 'logout' })
       window.intempt.logOut()
     } catch (err) {
       console.error('Intempt error:', err.message)
