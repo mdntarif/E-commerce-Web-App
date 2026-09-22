@@ -4,13 +4,18 @@ import { useCart } from "../context/CartContext.jsx"
 export default function Cart() {
   const { cartItems, updateQuantity, removeFromCart, totalPrice } = useCart()
 
-  // Purchase trigger button — fires a purchase event with the userId (email), no real checkout.
+  // Purchase trigger button — asks for an email (same as Login With Email) and
+  // fires a purchase event with it as the userId. Not saved anywhere, just used
+  // for this one event.
   const handlePurchase = () => {
+    const email = window.prompt('Enter your email')
+    if (!email) return
+
     try {
       if (!window.intempt) return
       window.intempt.record({
         eventTitle: 'purchase',
-        userId: 'onboarding-tester@yourcompany.com',
+        userId: email,
         data: { total: totalPrice, itemCount: cartItems.length }
       })
       alert('Purchase event sent! Check Intempt dashboard.')
