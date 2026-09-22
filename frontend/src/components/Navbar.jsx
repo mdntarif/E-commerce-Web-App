@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom"
 import { useCart } from "../context/CartContext.jsx"
+import { useAuth } from "../context/AuthContext.jsx"
 
 // Login trigger buttons — ask the user for their email/phone, then fire a login
-// event with that value as the userId. No real auth flow.
+// event with that value as the userId, and remember it so other actions (like
+// Purchase) can reuse it as the logged-in user. No real auth flow.
 export default function Navbar() {
   const { totalItems } = useCart()
+  const { setUserId } = useAuth()
 
   const handleLoginWithEmail = () => {
     const email = window.prompt('Enter your email')
     if (!email) return
 
     try {
+      setUserId(email)
       if (!window.intempt) return
       window.intempt.record({
         eventTitle: 'login',
@@ -27,6 +31,7 @@ export default function Navbar() {
     if (!phone) return
 
     try {
+      setUserId(phone)
       if (!window.intempt) return
       window.intempt.record({
         eventTitle: 'login',

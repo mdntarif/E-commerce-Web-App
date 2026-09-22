@@ -3,15 +3,18 @@ import ReactDOM from "react-dom/client"
 import { BrowserRouter } from "react-router-dom"
 import App from "./App.jsx"
 import { CartProvider } from "./context/CartContext.jsx"
+import { AuthProvider } from "./context/AuthContext.jsx"
 import "./index.css"
 
-// Entry point: render the App wrapped in the router and cart context provider.
+// Entry point: render the App wrapped in the router, auth, and cart context providers.
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <CartProvider>
-        <App />
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <App />
+        </CartProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 )

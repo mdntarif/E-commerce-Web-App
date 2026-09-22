@@ -1,16 +1,24 @@
 import { Link } from "react-router-dom"
 import { useCart } from "../context/CartContext.jsx"
+import { useAuth } from "../context/AuthContext.jsx"
 
 export default function Cart() {
   const { cartItems, updateQuantity, removeFromCart, totalPrice } = useCart()
+  const { userId } = useAuth()
 
-  // Purchase trigger button — fires a purchase event with the userId (email), no real checkout.
+  // Purchase trigger button — fires a purchase event using the userId from
+  // whichever login button was used, no real checkout.
   const handlePurchase = () => {
+    if (!userId) {
+      alert('Please log in with email or phone first.')
+      return
+    }
+
     try {
       if (!window.intempt) return
       window.intempt.record({
         eventTitle: 'purchase',
-        userId: 'onboarding-tester@yourcompany.com',
+        userId,
         data: { total: totalPrice, itemCount: cartItems.length }
       })
       alert('Purchase event sent! Check Intempt dashboard.')
