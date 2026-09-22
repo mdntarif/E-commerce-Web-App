@@ -1,20 +1,37 @@
 import { Link } from "react-router-dom"
 import { useCart } from "../context/CartContext.jsx"
 
-const USER_ID = 'onboarding-tester@yourcompany.com'
-
-// Top navigation bar. Shows the shop name and a link to the cart with a count badge.
+// Login trigger buttons — ask the user for their email/phone, then fire a login
+// event with that value as the userId. No real auth flow.
 export default function Navbar() {
   const { totalItems } = useCart()
 
-  // Login trigger buttons — fire a login event with the userId (email), no real auth flow.
-  const handleLogin = (method) => {
+  const handleLoginWithEmail = () => {
+    const email = window.prompt('Enter your email')
+    if (!email) return
+
     try {
       if (!window.intempt) return
       window.intempt.record({
         eventTitle: 'login',
-        userId: USER_ID,
-        data: { method }
+        userId: email,
+        data: { method: 'email' }
+      })
+    } catch (err) {
+      console.error('Intempt error:', err.message)
+    }
+  }
+
+  const handleLoginWithPhone = () => {
+    const phone = window.prompt('Enter your phone number (with country code, e.g. +911234567890)')
+    if (!phone) return
+
+    try {
+      if (!window.intempt) return
+      window.intempt.record({
+        eventTitle: 'login',
+        userId: phone,
+        data: { method: 'phone' }
       })
     } catch (err) {
       console.error('Intempt error:', err.message)
@@ -28,10 +45,10 @@ export default function Navbar() {
       </Link>
 
       <div className="navbar-actions">
-        <button className="btn" onClick={() => handleLogin('email')}>
+        <button className="btn" onClick={handleLoginWithEmail}>
           Login With Email
         </button>
-        <button className="btn" onClick={() => handleLogin('phone')}>
+        <button className="btn" onClick={handleLoginWithPhone}>
           Login With Phone Number
         </button>
       </div>
