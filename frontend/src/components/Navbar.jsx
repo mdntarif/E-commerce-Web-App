@@ -38,6 +38,17 @@ export default function Navbar() {
     }
   }
 
+  // Logout trigger button — fires a logout event, then resets the SDK's identity.
+  const handleLogout = () => {
+    try {
+      if (!window.intempt) return
+      window.intempt.track({ eventTitle: 'logout' })
+      window.intempt.logOut()
+    } catch (err) {
+      console.error('Intempt error:', err.message)
+    }
+  }
+
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-brand">
@@ -50,6 +61,9 @@ export default function Navbar() {
         </button>
         <button className="btn" onClick={handleLoginWithPhone}>
           Login With Phone Number
+        </button>
+        <button className="btn" onClick={handleLogout}>
+          Logout
         </button>
       </div>
 
