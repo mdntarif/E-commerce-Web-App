@@ -4,6 +4,21 @@ import { useCart } from "../context/CartContext.jsx"
 export default function Cart() {
   const { cartItems, updateQuantity, removeFromCart, totalPrice } = useCart()
 
+  // Purchase trigger button — fires a purchase event with the userId (email), no real checkout.
+  const handlePurchase = () => {
+    try {
+      if (!window.intempt) return
+      window.intempt.record({
+        eventTitle: 'purchase',
+        userId: 'onboarding-tester@yourcompany.com',
+        data: { total: totalPrice, itemCount: cartItems.length }
+      })
+      alert('Purchase event sent! Check Intempt dashboard.')
+    } catch (err) {
+      console.error('Intempt error:', err.message)
+    }
+  }
+
   // Task 3.5 — fire a rich event with user info
   const handleDemoRequest = () => {
     try {
@@ -62,8 +77,12 @@ export default function Cart() {
         <strong>${totalPrice.toFixed(2)}</strong>
       </div>
 
+      <button className="btn" style={{ marginTop: '1rem' }} onClick={handlePurchase}>
+        Purchase
+      </button>
+
       {/* Task 3.5 — Request Demo button */}
-      <button className="btn" style={{ marginTop: '1rem' }} onClick={handleDemoRequest}>
+      <button className="btn" style={{ marginTop: '1rem', marginLeft: '0.5rem' }} onClick={handleDemoRequest}>
         Request Demo
       </button>
     </section>

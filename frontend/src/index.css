@@ -54,6 +54,17 @@ body {
   font-weight: 500;
 }
 
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-actions .btn {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
 .cart-badge {
   position: absolute;
   top: -10px;
